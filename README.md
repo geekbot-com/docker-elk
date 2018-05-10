@@ -1,7 +1,7 @@
 # Docker ELK stack
 
 [![Join the chat at https://gitter.im/deviantony/docker-elk](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/deviantony/docker-elk?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
-[![Elastic Stack version](https://img.shields.io/badge/ELK-6.2.2-blue.svg?style=flat)](https://github.com/deviantony/docker-elk/issues/248)
+[![Elastic Stack version](https://img.shields.io/badge/ELK-6.2.3-blue.svg?style=flat)](https://github.com/deviantony/docker-elk/issues/266)
 [![Build Status](https://api.travis-ci.org/deviantony/docker-elk.svg?branch=master)](https://travis-ci.org/deviantony/docker-elk)
 
 Run the latest version of the ELK (Elasticsearch, Logstash, Kibana) stack with Docker and Docker Compose.
@@ -26,6 +26,7 @@ Based on the official Docker images:
 1. [Requirements](#requirements)
    * [Host setup](#host-setup)
    * [SELinux](#selinux)
+   * [DockerForWindows](#dockerforwindows)
 2. [Getting started](#getting-started)
    * [Bringing up the stack](#bringing-up-the-stack)
    * [Initial setup](#initial-setup)
@@ -60,6 +61,10 @@ apply the proper context:
 ```console
 $ chcon -R system_u:object_r:admin_home_t:s0 docker-elk/
 ```
+
+### DockerForWindows
+
+If you're using Docker for Windows, ensure the 'Shared Drives' feature is enabled for the C: drive (Docker for Windows > Settings > Shared Drives). [MSDN article detailing Shared Drives config](https://blogs.msdn.microsoft.com/stevelasker/2016/06/14/configuring-docker-for-windows-volumes/).
 
 ## Usage
 
@@ -122,7 +127,7 @@ Create an index pattern via the Kibana API:
 ```console
 $ curl -XPOST -D- 'http://localhost:5601/api/saved_objects/index-pattern' \
     -H 'Content-Type: application/json' \
-    -H 'kbn-version: 6.2.2' \
+    -H 'kbn-version: 6.2.3' \
     -d '{"attributes":{"title":"logstash-*","timeFieldName":"@timestamp"}}'
 ```
 
